@@ -67,16 +67,18 @@ class Vampire {
 
   // Returns an array of all the vampires that were converted after 1980
   get allMillennialVampires() {
-    let totalMillenials = 0;
+    let totalMillenials = [];
     let currentVamp = this;
 
     if (currentVamp.yearConverted > 1980) {
-      totalMillenials++;
+      totalMillenials.push(currentVamp);
     }
     // console.log(totalMillenials);
 
     for (const descendants of this.offspring) {
-      totalMillenials += descendants.allMillennialVampires;
+      const vampsMillenials = descendants.allMillennialVampires;
+      totalMillenials = totalMillenials.concat(vampsMillenials);
+      // totalMillenials += descendants.allMillennialVampires;
       // console.log('from loop ' + totalMillenials);
     }
     return totalMillenials;
@@ -127,7 +129,7 @@ elgort.addOffspring(andrew);
 
 // console.log(original.isMoreSeniorThan(elgort));
 
-console.log(sam.allMillennialVampires);
+console.log(original.allMillennialVampires);
 
 // original.totalDescendents;
 
